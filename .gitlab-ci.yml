@@ -2,7 +2,7 @@ stages:
     - build
     - test
     
-buildslc6:
+build_slc6:
   image: gitlab-registry.cern.ch/ci-tools/ci-worker:slc6
   stage: build
   # instead of calling g++ directly you can also use some build toolkit like make
@@ -26,14 +26,14 @@ buildslc6:
   #     - "*.o"
 
 # run tests using the binary built before
-testslc6:
+test_slc6:
   image: gitlab-registry.cern.ch/ci-tools/ci-worker:slc6
   stage: test
   script:
     - ./DB12.exe -dn wholenode
 
 
-buildsg++11:
+builds_g++11:
   image: gitlab-registry.cern.ch/ci-tools/ci-worker:cc7
   stage: build
   # instead of calling g++ directly you can also use some build toolkit like make
@@ -41,6 +41,7 @@ buildsg++11:
   # before_script: 
   #   - apt update && apt -y install make autoconf 
   script: 
+    - chmod u+x ./Compile_g++11.sh
     - ./Compile_g++11.sh
     
   allow_failure: true    
@@ -56,4 +57,9 @@ buildsg++11:
   #   paths:
   #     - "*.o"
 
+tests_g++11:
+  image: gitlab-registry.cern.ch/ci-tools/ci-worker:slc6
+  stage: test
+  script:
+    - ./DB12_c++11.exe -dn wholenode
 
