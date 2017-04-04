@@ -38,8 +38,8 @@ builds_g++11:
   stage: build
   # instead of calling g++ directly you can also use some build toolkit like make
   # install the necessary build tools when needed
-  # before_script: 
-  #   - apt update && apt -y install make autoconf 
+  before_script: 
+    - yum install -y gcc-c++ 
   script: 
     - chmod u+x ./Compile_g++11.sh
     - ./Compile_g++11.sh
