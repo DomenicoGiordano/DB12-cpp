@@ -58,7 +58,7 @@ builds_g++11:
   #     - "*.o"
 
 tests_g++11:
-  image: gitlab-registry.cern.ch/ci-tools/ci-worker:slc6
+  image: gitlab-registry.cern.ch/ci-tools/ci-worker:cc7
   stage: test
   script:
     - ./DB12_c++11.exe -dn wholenode
