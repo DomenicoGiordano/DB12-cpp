@@ -1,0 +1,23 @@
+image: gitlab-registry.cern.ch/ci-tools/ci-worker:slc6
+
+build:
+  stage: build
+  # instead of calling g++ directly you can also use some build toolkit like make
+  # install the necessary build tools when needed
+  # before_script: 
+  #   - apt update && apt -y install make autoconf 
+  script: 
+    - g++ -lpthread -lrt DB12.cpp -o DB12.exe
+  artifacts:
+    paths:
+      - DB12.exe
+  # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
+  # cache:
+  #   paths:
+  #     - "*.o"
+
+# run tests using the binary built before
+test:
+  stage: test
+  script:
+    - ./DB12.exe -dn 1
