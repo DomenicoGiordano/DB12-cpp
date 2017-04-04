@@ -1,6 +1,9 @@
-image: gitlab-registry.cern.ch/ci-tools/ci-worker:slc6
-
-build:
+stages:
+    - build
+    - test
+    
+buildslc6:
+  image: gitlab-registry.cern.ch/ci-tools/ci-worker:slc6
   stage: build
   # instead of calling g++ directly you can also use some build toolkit like make
   # install the necessary build tools when needed
@@ -23,7 +26,34 @@ build:
   #     - "*.o"
 
 # run tests using the binary built before
-test:
+testslc6:
+  image: gitlab-registry.cern.ch/ci-tools/ci-worker:slc6
   stage: test
   script:
     - ./DB12.exe -dn wholenode
+
+
+buildsg++11:
+  image: gitlab-registry.cern.ch/ci-tools/ci-worker:cc7
+  stage: build
+  # instead of calling g++ directly you can also use some build toolkit like make
+  # install the necessary build tools when needed
+  # before_script: 
+  #   - apt update && apt -y install make autoconf 
+  script: 
+    - ./Compile_g++11.sh
+    
+  allow_failure: true    
+
+  artifacts:
+    paths:
+      - DB12_c++11.exe
+      
+    expire_in: '1 week'
+    when: always
+  # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
+  # cache:
+  #   paths:
+  #     - "*.o"
+
+
