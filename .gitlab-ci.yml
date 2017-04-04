@@ -8,9 +8,15 @@ build:
   #   - apt update && apt -y install make autoconf 
   script: 
     - g++ -lpthread -lrt DB12.cpp -o DB12.exe
+    
+  allow_failure: true    
+
   artifacts:
     paths:
       - DB12.exe
+      
+    expire_in: '1 week'
+    when: always
   # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
   # cache:
   #   paths:
@@ -20,4 +26,4 @@ build:
 test:
   stage: test
   script:
-    - ./DB12.exe -dn 1
+    - ./DB12.exe -dn wholenode
