@@ -60,11 +60,11 @@ float singleDiracBenchmark(pid_t pid){
 
   int initialIterations=2;
   int iterations = 1;
-  int extraIterations = 1;
+  int extraIterations = 2;
   //  std::cout << "Function running in thread " << thread_id << std::endl;
 
   int nTOT = 1000 * 1000 * 12.5 ;
-  float calib = 250.0;
+  float calib = 25.0;
   clock_t t;
   float cput;
 
