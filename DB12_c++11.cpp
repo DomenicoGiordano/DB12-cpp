@@ -79,18 +79,18 @@ float singleDiracBenchmark(std::promise<float> * promObj){
        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &time1);
     }
     
-    /*
+   
     std::normal_distribution<> d(10,1);
     for(int n=0; n<nTOT; ++n) {
       d(gen);
     }
-    */
-
+    
+    /*
     for(int n=0; n<nTOT; ++n) {
       //sampleNormal();
       normalvariate(); //This implements the same function used in the python version
     }
-    
+    */
     if (i == initialIterations+iterations-1){
       t = clock() - t;
       int second_time = time(NULL);
